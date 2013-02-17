@@ -1,9 +1,14 @@
-describe Vtd::Xml do
-  it 'should have a version number' do
-    Vtd::Xml::VERSION.should_not be_nil
+require 'spec_helper'
+
+describe VTD::Xml do
+  it 'has a version number' do
+    VTD::Xml::VERSION.should_not be_nil
   end
 
-  it 'should do something useful' do
-    false.should be_true
+  describe '.open' do
+    it 'creates a new parser' do
+      VTD::Xml::Parser.should_receive(:new).with('path.xml')
+      VTD::Xml.open 'path.xml'
+    end
   end
 end

@@ -1,2 +1,1 @@
-$: << 'lib'
 require 'vtd/xml'

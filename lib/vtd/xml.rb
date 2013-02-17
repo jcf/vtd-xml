@@ -1,7 +1,15 @@
-require "vtd/xml/version"
+require 'java'
+require 'vtd-xml-java.jar'
 
-module Vtd
+require 'vtd/xml/version'
+require 'vtd/xml/finder'
+require 'vtd/xml/parser'
+require 'vtd/xml/node'
+
+module VTD
   module Xml
-    # Your code goes here...
+    def self.open(path)
+      Parser.new(path)
+    end
   end
 end
