@@ -43,7 +43,7 @@ With the following example XML:
 require 'vtd-xml'
 
 # Create a parser
-parser = VTD::Xml.Parser.new 'path/to.xml'
+parser = VTD::Xml::Parser.new 'path/to.xml'
 
 # This shortcut does the same
 parser = VTD::Xml.open 'path/to.xml'
