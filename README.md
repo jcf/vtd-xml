@@ -48,15 +48,23 @@ parser = VTD::Xml::Parser.new 'path/to.xml'
 # This shortcut does the same
 parser = VTD::Xml.open 'path/to.xml'
 
-parser.find('//book/author') do |node|
+parser.find('//book/author').each do |node|
   # Iterates through each node
 end
+
+parser.find('//book/author').max_by { |node| node['sold'] }
+```
+
+### Finding a node
+
+``` ruby
+node = parser.find('//book/author[1]').first
 ```
 
 ### Working with attributes
 
 ``` ruby
-node = parser.find('//book/author[1]').first
+
 # Accessing attributes
 node['name']
 
@@ -68,6 +76,8 @@ node.slice('title', 'missing')
 
 node.attributes # => returns every attribute
 ```
+
+**See the examples directory for more.**
 
 ## Contributing
 

@@ -4,18 +4,22 @@ module VTD
       module Attributes
         AttributeMissing = Class.new(StandardError)
 
+        def initialize(*)
+          @attribute_cache = {}
+          @attributes = nil
+        end
+
         def attributes
-          @attributes ||=
-            begin
-              cache = {}
-              @auto_pilot.select_attr('*')
+          return @attributes if @attributes
 
-              while (i = @auto_pilot.iterate_attr) != -1
-                cache[string_from_index i] = string_from_index i + 1
-              end
+          @attributes = {}
 
-              cache
-            end
+          @auto_pilot.select_attr('*')
+          while (i = @auto_pilot.iterate_attr) != -1
+            @attributes[string_from_index i] = string_from_index i + 1
+          end
+
+          @attribute_cache = @attributes
         end
 
         def [](key)
@@ -45,7 +49,7 @@ module VTD
         private
 
         def find_attribute(key)
-          string_from_index @nav.get_attr_val(key)
+          @attribute_cache[key] ||= string_from_index @nav.get_attr_val(key)
         end
       end
     end
