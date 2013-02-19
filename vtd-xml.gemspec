@@ -5,10 +5,10 @@ require 'vtd/xml/version'
 Gem::Specification.new do |gem|
   gem.name          = 'vtd-xml'
   gem.version       = VTD::Xml::VERSION
-  gem.platform =    'java'
+  gem.platform      = 'java'
 
-  gem.authors       = ['James Conroy-Finn']
-  gem.email         = ['james@logi.cl']
+  gem.authors       = ['James Conroy-Finn', 'Jesper Kjeldgaard']
+  gem.email         = ['james@logi.cl', 'thejspr@gmail.com']
 
   gem.description   = %q{VTD-XML for JRuby}
   gem.summary       = %q{A thin wrapper around the VTD-XML Java library}

@@ -43,12 +43,18 @@ module VTD
           '<books>',
           '  <book title="A Tale of Two Cities" sold="200000000" firstPublished="1859">',
           '    <author name="Charles Dickens" />',
+          '    <language>English</language>',
+          '    <publisher>Chapman &amp; Hall</publisher>',
           '  </book>',
           '  <book title="The Lord of the Rings" sold="150000000" firstPublished="1954">',
           '    <author name="J. R. R. Tolkien" />',
+          '    <language>English</language>',
+          '    <publisher>George Allen &amp; Unwin</publisher>',
           '  </book>',
           '  <book title="The Little Prince" sold="140000000" firstPublished="1943">',
           '    <author name="Antoine de Saint-Exupéry" />',
+          '    <language>French</language>',
+          '    <publisher>Gallimard</publisher>',
           '  </book>',
           '</books>'
       end
