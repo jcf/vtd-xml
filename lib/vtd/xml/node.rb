@@ -29,8 +29,10 @@ module VTD
 
       def with_first_child(name = nil)
         if move_to(:first_child, name)
-          yield dup
+          result = yield dup
           move_to(:parent)
+
+          result
         end
       end
 
