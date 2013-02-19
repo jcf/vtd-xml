@@ -77,5 +77,9 @@ describe VTD::Xml::Parser do
         expect(child['name']).to eq('Charles Dickens')
       end
     end
+
+    it 'returns the last accessed value' do
+      expect(book.with_first_child { 'return value' }).to eq('return value')
+    end
   end
 end
