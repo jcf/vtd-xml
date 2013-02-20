@@ -29,16 +29,31 @@ With the following example XML:
     <author name="Charles Dickens" />
     <language>English</language>
     <publisher>Chapman &amp; Hall</publisher>
+    <ratings>
+      <rating userID="1">5</rating>
+      <rating userID="4">2</rating>
+      <rating userID="2">3</rating>
+    </ratings>
   </book>
   <book title="The Lord of the Rings" sold="150000000" firstPublished="1954">
     <author name="J. R. R. Tolkien" />
     <language>English</language>
     <publisher>George Allen &amp; Unwin</publisher>
+    <ratings>
+      <rating userID="1">5</rating>
+      <rating userID="4">4</rating>
+      <rating userID="2">5</rating>
+    </ratings>
   </book>
   <book title="The Little Prince" sold="140000000" firstPublished="1943">
     <author name="Antoine de Saint-Exupéry" />
     <language>French</language>
     <publisher>Gallimard</publisher>
+    <ratings>
+      <rating userID="4">4</rating>
+      <rating userID="2">2</rating>
+      <rating userID="1">3</rating>
+    </ratings>
   </book>
 </books>
 ```
@@ -86,11 +101,13 @@ node.attributes # => returns every attribute
 ### Node traversal
 
 ``` ruby
-node.with_first_child('language') do |child|
-  child.text # => "English"
-end
+child = node.children('language').first
+child.text # => "English"
 
-node['title'] # => "A Tale of Two Cities"
+node.children('rating').map do |child|
+  child.text.to_i
+end
+# => [5,2,3]
 ```
 
 **See the examples directory for more.**

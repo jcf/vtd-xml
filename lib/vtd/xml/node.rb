@@ -3,11 +3,6 @@ require 'vtd/xml/node/attributes'
 module VTD
   module Xml
     class Node
-      TYPES = {
-        first_child: com.ximpleware.VTDNav::FIRST_CHILD,
-        parent: com.ximpleware.VTDNav::PARENT
-      }
-
       include Attributes
 
       attr_reader :name, :text
@@ -27,25 +22,11 @@ module VTD
         @text ||= string_from_index @nav.get_text
       end
 
-      def with_first_child(name = nil)
-        if move_to(:first_child, name)
-          result = yield dup
-          move_to(:parent)
-
-          result
-        end
-      end
-
       def children(options = {})
-        name = options.fetch(:only, '*')
-        @auto_pilot.select_element(name)
-
-        @auto_pilot.iterate if name == '*'
+        next_element unless child_selected?(options)
 
         Enumerator.new do |yielder|
-          while @auto_pilot.iterate
-            yielder << dup
-          end
+          yielder << dup while next_element
         end
       end
 
@@ -55,20 +36,18 @@ module VTD
 
       private
 
+      def child_selected?(options)
+        name = options.fetch(:only, '*')
+        @auto_pilot.select_element(name)
+        name != '*'
+      end
+
+      def next_element
+        @auto_pilot.iterate
+      end
+
       def string_from_index(index)
         @nav.to_normalized_string(index) if index != -1
-      end
-
-      def move_to(type, name = nil)
-        if name
-          @nav.to_element(find_type(type), name)
-        else
-          @nav.to_element(find_type(type))
-        end
-      end
-
-      def find_type(type)
-        TYPES[type] or raise ArgumentError, "Unknown node type: #{type.inspect}"
       end
     end
   end
