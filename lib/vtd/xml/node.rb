@@ -36,6 +36,19 @@ module VTD
         end
       end
 
+      def children(options = {})
+        name = options.fetch(:only, '*')
+        @auto_pilot.select_element(name)
+
+        @auto_pilot.iterate if name == '*'
+
+        Enumerator.new do |yielder|
+          while @auto_pilot.iterate
+            yielder << dup
+          end
+        end
+      end
+
       def inspect
         %(#<#{self.class}:#{self.object_id} @current=#{@current} @nav=#{@nav}>)
       end
