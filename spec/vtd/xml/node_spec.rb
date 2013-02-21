@@ -32,7 +32,7 @@ describe VTD::Xml::Node do
 
     it 'can return all attributes' do
       expect(book.attributes).to eq(
-        'title' => title, 'sold' => sold, 'firstPublished' => published)
+        'title' => title, 'sold' => sold, 'firstPublished' => published, 'rank' => '1')
     end
   end
 
@@ -51,6 +51,15 @@ describe VTD::Xml::Node do
 
     it 'return an empty array when no matches are found' do
       expect(book.children(only: 'soundtrack').to_a).to eq([])
+    end
+
+    it 'doesnt affect existing node traversal' do
+      ranks = parser.find('//book').map do |book|
+        book.children.to_a
+        book['rank']
+      end
+
+      expect(ranks).to eq(%w(1 2 3))
     end
   end
 end

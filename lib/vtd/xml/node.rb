@@ -23,10 +23,13 @@ module VTD
       end
 
       def children(options = {})
-        next_element unless child_selected?(options)
-
         Enumerator.new do |yielder|
+          @nav.push
+          next_element unless child_selected?(options)
+
           yielder << dup while next_element
+
+          @nav.pop
         end
       end
 
