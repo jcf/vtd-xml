@@ -11,7 +11,6 @@ module VTD
         @nav        = nav
         @auto_pilot = auto_pilot
         @current    = current
-        super
       end
 
       def name
