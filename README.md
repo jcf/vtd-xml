@@ -1,5 +1,7 @@
 # vtd-xml
 
+[![Code Climate](https://codeclimate.com/github/jcf/vtd-xml.png)](https://codeclimate.com/github/jcf/vtd-xml)
+
 Parse large amounts of XML quickly and easily.
 
 **This library currently only works with JRuby.**
